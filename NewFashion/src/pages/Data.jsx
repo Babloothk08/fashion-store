@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { FaStarHalf } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Navbar from "../component/Navbar";
 import { motion } from "framer-motion"; 
+import publicApi from "../pages/api/publicApi.js"
 
 
 function Data() {
@@ -16,7 +15,7 @@ function Data() {
   
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/data", {
+      const response = await publicApi.get("/api/data", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -37,8 +36,8 @@ function Data() {
   }
 
   try {
-    const res = await axios.post(
-      "http://localhost:8080/api/cart/add",
+    const res = await publicApi.post(
+      "/api/cart/add",
       { productId, quantity: 1 },
       {
         headers: {
@@ -64,7 +63,6 @@ function Data() {
   return (
     <>
      <div>
-      <Navbar/>
       <div className="mt-18">
       <img src="https://cms.landmarkshops.in/cdn-cgi/image/w=1232,q=85,fit=cover/LS-Fest/LS-new/desktop-dept-6modblk-oneBythree-A-Women-15Oct25.jpg" alt="" className="w-[100vw] object-cover max-sm:object-center sm:object-center h-90" />
      </div>

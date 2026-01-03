@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import publicApi from "../pages/api/publicApi.js"
 
 function AdminComponent() {
   const [users, setUsers] = useState([]);
@@ -18,7 +18,7 @@ function AdminComponent() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:8080/api/users", config);
+      const res = await publicApi.get("/api/users", config);
       setUsers(res.data.data);
       setLoading(false);
     } catch (error) {
@@ -31,7 +31,7 @@ function AdminComponent() {
   const fetchManagers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:8080/api/managers", config);
+      const res = await publicApi.get("/api/managers", config);
       setManagers(res.data.data);
       setLoading(false);
     } catch (error) {
@@ -52,7 +52,7 @@ function AdminComponent() {
         alert("Please fill all fields");
         return;
       }
-      const res = await axios.post("http://localhost:8080/api/manager", newManager, config);
+      const res = await publicApi.post("/api/manager", newManager, config);
       alert("Manager added successfully");
       console.log(res);
       
@@ -68,7 +68,7 @@ function AdminComponent() {
   const handleDeleteManager = async (id) => {
     if (!window.confirm("Are you sure you want to delete this manager?")) return;
     try {
-      await axios.delete(`http://localhost:8080/api/manager/${id}`, config);
+      await publicApi.delete(`/api/manager/${id}`, config);
       alert("Manager deleted successfully");
       fetchManagers(); // refresh managers list
     } catch (error) {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import Navbar from "../component/Navbar";
+import publicApi from "../pages/api/publicApi.js"
 
 function DetailPage() {
   const { id } = useParams();
@@ -17,7 +16,7 @@ function DetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/data");
+        const response = await publicApi.get("/api/data");
         const product = response.data.find((item) => item._id === id);
         setData(product);
         setSinglePage(product?.avatar);
@@ -42,8 +41,8 @@ function DetailPage() {
     }
 
     try {
-      await axios.post(
-        "http://localhost:8080/api/cart/add",
+      await publicApi.post(
+        "/api/cart/add",
         {
           productId: data._id,
           quantity: 1,
@@ -56,7 +55,7 @@ function DetailPage() {
         }
       );
 
-      alert("✅ Product added to cart!");
+      alert("Product added to cart!");
     } catch (error) {
       console.error(error);
       alert(" Error adding to cart");
@@ -76,8 +75,8 @@ function DetailPage() {
     }
 
     try {
-      await axios.post(
-        "http://localhost:8080/api/cart/add",
+      await publicApi.post(
+        "/api/cart/add",
         {
           productId: data._id,
           quantity: 1,
@@ -103,7 +102,6 @@ function DetailPage() {
 
   return (
     <>
-      <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 mt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

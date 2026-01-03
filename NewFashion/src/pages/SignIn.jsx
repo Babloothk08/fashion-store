@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-// import { useSelector, useDispatch } from "react-redux"
+import publicApi from "../pages/api/publicApi.js"
 
 function SignIn() {
   const [change, setChange] = useState({
@@ -25,8 +24,8 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/signIn",
+      const response = await publicApi.post(
+        "/api/signIn",
         change,
         {
           headers: {
@@ -50,7 +49,7 @@ function SignIn() {
         if (userRole === "admin") {
           navigate("/admin");
         } else if (userRole === "manager") {
-          navigate("/productAccess");
+          navigate("/manager");
         } else {
           navigate("/home");   // normal user
         }
@@ -67,7 +66,6 @@ function SignIn() {
     setChange({
       email: "",
       password: "",
-      // role : "",
     });
   };
 
@@ -93,18 +91,8 @@ function SignIn() {
               className="border-1 h-12 p-7 text-xl rounded-xl cursor-pointer"
               onChange={handleChange}
             />
-            {/* <select 
-            name="role"
-            value={change.role}
-            onChange={handleChange}
-            className="border-1 h-12 px-4 text-xl rounded-xl cursor-pointer"
-            >
-              <option value="user">User</option>
-              <option value="manager">Manager</option>
-              <option value="admin">Admin</option>
-            </select> */}
+            
           </div>
-          {/* {msg && <p className='text-red-600 text-lg'>{msg}</p>} */}
           <div className="text-white font-bold text-center pt-2 text-3xl bg-yellow-600 h-16 rounded-xl cursor-pointer">
             <button className="cursor-pointer">Continue</button>
             <ToastContainer autoClose={1500} />
@@ -127,29 +115,3 @@ function SignIn() {
 
 export default SignIn;
 
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   try {
-//     const response = await axios.post(
-//       "http://localhost:8080/api/signIn",
-//       change,
-//       { headers: { "Content-Type": "application/json" } }
-//     );
-
-//     console.log("RES", response.data);
-
-//     // ✅ Store token
-//     localStorage.setItem("token", response.data.token);
-
-//     toast.success("Login Successful", {
-//       onClose: () => navigate('/')
-//     });
-
-//   } catch (error) {
-//     if(error.response?.data?.message){
-//       toast.error(error.response.data.message)
-//     } else {
-//       toast.error("Email Not Registered")
-//     }
-//   }
-// };

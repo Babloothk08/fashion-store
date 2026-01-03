@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {  useNavigate } from "react-router-dom";
+import publicApi from "../pages/api/publicApi.js"
 
 function ForgotPassword() {
   const [step, setStep] = useState(1); // 1=enter email, 2=enter otp, 3=new password
@@ -14,7 +14,7 @@ function ForgotPassword() {
   // 1️⃣ Send OTP
   const handleSendOTP = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/forgot-password", { email });
+      const res = await publicApi.post("/api/forgot-password", { email });
       toast.success(res.data.message);
       setStep(2);
       
@@ -26,7 +26,7 @@ function ForgotPassword() {
   // 2️⃣ Verify OTP
   const handleVerifyOTP = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/verify-otp", { email, otp });
+      const res = await publicApi.post("/api/verify-otp", { email, otp });
       toast.success(res.data.message);
       setStep(3);
     } catch (err) {
@@ -37,7 +37,7 @@ function ForgotPassword() {
   // 3️⃣ Reset Password
   const handleResetPassword = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/reset-password", { email, newPassword });
+      const res = await publicApi.post("/api/reset-password", { email, newPassword });
       toast.success(res.data.message);
       setStep(1);
       setEmail("");

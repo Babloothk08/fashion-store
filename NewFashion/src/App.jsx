@@ -4,10 +4,7 @@ import {  Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
-// import Shop from './pages/Shop'
-import Footer from './component/Footer'
 import DetailPage from './pages/DetailPage'
-import Category from './pages/Category'
 import {  useState } from 'react'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
@@ -22,10 +19,11 @@ import CheckOut from './pages/CheckOut'
 import Order from './pages/Order'
 import OrderDetails from './pages/OrderDetails'
 import SearchPage from './pages/SearchPage'
-// import axios from 'axios'
 import publicApi from './pages/api/publicApi.js'
 import AdminComponent from './pages/AdminComponent.jsx'
 import AdminNavbar from './component/AdminNavbar.jsx'
+import AllProducts from './component/AllProducts.jsx'
+import ManagerComponent from './pages/ManagerComponent.jsx'
 
 function App() {
   const [search, setSearch] = useState("")
@@ -56,19 +54,7 @@ function App() {
   }
 
 
-  // useEffect(() => {
-  //   const getSearchProduct = async() => {
-  //   if(search.trim() !== ""){
-  //     const res = await axios.get( `http://localhost:8080/api/search?q=${search}`,)
-  //   setSearchProduct(res.data);
-  //   navigate("/searchPage");
-  //   }
-  //   else{
-  //     setSearchProduct([])
-  //   }
-  // }
-  // getSearchProduct()
-  // },[search])
+ 
   
   return (
     <>
@@ -82,26 +68,23 @@ function App() {
         <Route path='/home' element = {<Home />}/>
         <Route path='/about' element = {<About/>}/>
         <Route path='/contact' element = {<Contact/>}/>
-        {/* <Route path='/shop' element = {<Shop handleAddProductToCart = {handleAddProductToCart}/>}/> */}
-        {/* <Route path='/cart' element = {<Cart addCart = {addCart} setAddCart ={setAddCart}/>}/> */}
         <Route path= '/detailPage/:id' element = {<DetailPage />}/>
-        {/* <Route path='/:category/:name' element={<Category handleAddProductToCart = {handleAddProductToCart}/>}/> */}
         <Route path='/' element = {<SignIn/>}/>
         <Route path='/signUp' element = {<SignUp/>}/>
         <Route path='/profile' element = {<Profile/>}/>
-        <Route path='/productAccess' element = {<Product/>}/>
+        <Route path='/admin/product' element = {<Product/>}/>
         <Route path='/allItem' element = {<AllItems/>}/>
         <Route path='/data' element = {<Data/>}/>
         <Route path='/userCart' element = {<UserCart/>}/>
-        <Route path='logOut' element = {<LogOut/>}/>
-        <Route path='forgotPassword' element = {<ForgotPassword/>}/>
-        <Route path='checkout' element = {<CheckOut/>}/>
-        <Route path='order' element = {<Order/>}/>
-        <Route path='orderdetails' element = {<OrderDetails/>}/>
-        <Route path='searchPage' element = {<SearchPage searchProduct = {searchProduct}/>}/>
-        <Route path='admin' element = {<AdminComponent/>}/>
-        {/* <Route path='/product' element = {<Product/>}/> */}
-        {/* <Route path='/productCard' element = {<ProductCard/>}/> */}
+        <Route path='/logOut' element = {<LogOut/>}/>
+        <Route path='/forgotPassword' element = {<ForgotPassword/>}/>
+        <Route path='/checkout' element = {<CheckOut/>}/>
+        <Route path='/order' element = {<Order/>}/>
+        <Route path='/orderdetails' element = {<OrderDetails/>}/>
+        <Route path='/searchPage' element = {<SearchPage searchProduct = {searchProduct}/>}/>
+        <Route path='/admin' element = {<AdminComponent/>}/>
+        <Route path='/admin/allProducts' element = {<AllProducts/>}/>
+        <Route path='/manager' element = {<ManagerComponent/>}/>
        </Routes>
       {/* </BrowserRouter> */}
       

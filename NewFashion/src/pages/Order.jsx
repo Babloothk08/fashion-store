@@ -1,7 +1,8 @@
-import axios from "axios";
+
 import { CheckCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import publicApi from "../pages/api/publicApi.js"
 
 function Order() {
   const[data, setData] = useState([])
@@ -14,7 +15,7 @@ function Order() {
       return
     }
     const fetchOrder = async() => {
-      const res =await axios.get("http://localhost:8080/api/orderDetails",{
+      const res = await publicApi.get("/api/orderDetails",{
         headers : {
           Authorization : `Bearer ${token}`,
           "Content-Type" : "application/json"
@@ -64,13 +65,6 @@ function Order() {
           >
             Continue Shopping
           </Link>
-
-          {/* <Link
-            to="/orderdetails"
-            className="w-full border border-emerald-500 text-emerald-600 py-2 rounded-lg font-semibold hover:bg-emerald-50 transition"
-          >
-            View Order Details
-          </Link> */}
         </div>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import publicApi from "../pages/api/publicApi.js"
 
 function UserCart() {
   const [cartItems, setCartItems] = useState([]);
@@ -13,15 +12,12 @@ function UserCart() {
   // 🔹 Fetch user cart from backend
   const getCart = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/cart/get", {
+      const res = await publicApi.get("/api/cart/get", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // console.log("daaaa", res);
-      // const items = setCartItems(res.data.data.items || []);   
       const items = res.data.data.items;
       console.log("item", items);
       setCartItems(items);
-      // console.log("dataaa", cartItems);
       calculateTotal(items);
     } catch (err) {
       console.error("Error fetching cart:", err);
@@ -45,7 +41,7 @@ function UserCart() {
   // Remove product from cart
   const removeFromCart = async (productId) => {
     try {
-      const remove = await axios.delete(`http://localhost:8080/api/cart/remove/${productId}`, {
+      const remove = await publicApi.delete(`/api/cart/remove/${productId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // alert(remove.data.message);
@@ -57,15 +53,15 @@ function UserCart() {
   };
   
 
-  useEffect(() => {
-    getCart();
-  }, []);
+  // useEffect(() => {
+  //   getCart();
+  // }, []);
 
   // Empty cart case
   if (cartItems.length === 0) {
     return (
       <>
-        <Navbar />
+        {/* <Navbar /> */}
         <h1 className="text-center text-2xl py-20">🛒 Your cart is empty</h1>
         <Footer />
       </>
@@ -82,7 +78,6 @@ function UserCart() {
       <div className="flex flex-wrap justify-around mt-15 py-15 mx-10">
         {/* Left side - products */}
         <div className="w-full md:w-2/3 flex flex-col gap-5">
-          {/* <h1 className="text-4xl font-bold text-blue-700">Shopping Cart</h1> */}
 
           {cartItems.map((item) => (
             <div

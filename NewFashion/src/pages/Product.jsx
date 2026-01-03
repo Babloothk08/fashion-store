@@ -1,9 +1,10 @@
-import axios from "axios";
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Navbar from "../component/Navbar";
+import publicApi from "../pages/api/publicApi.js"
+// import AdminNavbar from "../component/AdminNavbar.jsx";
 
 function Product() {
   const [change, setChange] = useState({
@@ -37,8 +38,8 @@ console.log(change)
     if (change.coverImage) formData.append("coverImage", change.coverImage);
    
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/addProduct",
+      const response = await publicApi.post(
+        "/api/addProduct",
         formData,
         {
           headers: {
@@ -50,13 +51,9 @@ console.log(change)
       console.log("Product added successful", response.data);
       console.log("gettt", response);
 
-      // ✅ Success message
       toast.success(response.data.message);
 
-      // navigate to login page after 2 sec delay (so user sees popup)
-      // setTimeout(() => {
-      //   navigate("/data");
-      // }, 2000);
+      
     } catch (error) {
       console.log("failed to access", error);
 
@@ -67,7 +64,6 @@ console.log(change)
       ) {
         toast.error(error.response.data.message);
       } else {
-        // agar backend se kuch bhi nahi mila (network error etc.)
         toast.error("Something went wrong ❌");
       }
     }
@@ -83,7 +79,7 @@ console.log(change)
   };
   return (
     <>
-    {/* <Navbar/> */}
+    {/* <AdminNavbar/> */}
      <div className="w-full min-h-screen px-4 pt-20   p-25   flex flex-col justify-center  items-center shadow-md bg-[url('https://im.uniqlo.com/global-cms/spa/res24ab4b5656b77c964dadd271276af132fr.jpg')] bg-cover ">
       <form onSubmit={handleSubmit}>
         <div className="w-full rounded-4xl shadow-lg bg-amber-100  p-4 flex flex-col justify-start ">

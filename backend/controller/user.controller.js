@@ -449,7 +449,7 @@ export const verifyOTP = async (req, res) => {
         html: `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
 
-      <p>Hi <strong>${user.name}</strong>,</p>
+      <p>Hi<strong>${user.name}</strong>,</p>
     </div>
   `
     };

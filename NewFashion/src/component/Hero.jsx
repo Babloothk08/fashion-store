@@ -1,9 +1,6 @@
-
-// import React, { useRef } from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Navbar from "./Navbar";
 
 function Hero() {
   const settings = {
@@ -17,8 +14,6 @@ function Hero() {
   };
   return (
     <div className="slider-container pt-18 w-full overflow-hidden">
-      {/* <h2>Auto Play {"&"} Pause with buttons</h2> */}
-      {/* <Slider ref={slider => (sliderRef = slider)} {...settings} > */}
       <Slider {...settings} >
         <div className=' '>
           <img src="https://www.jockey.in/cdn/shop/files/3-MIW-Desktop.webp?v=1750847852&width=1600" alt=""className='w-full object-cover h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]' />

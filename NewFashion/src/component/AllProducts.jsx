@@ -1,17 +1,18 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import publicApi from "../pages/api/publicApi.js";
 
 function AllProducts() {
   const [data, setData] = useState([]);
   console.log("allProducts", data);
   useEffect(() => {
     const getResponse = async () => {
-      const response = await axios.get("http://localhost:8080/api/data", {
+      const response = await publicApi.get("/api/data", {
         headers: {
-          "Content-TYpe": "application/json",
+          "Content-Type": "application/json",
         },
       });
       setData(response.data);

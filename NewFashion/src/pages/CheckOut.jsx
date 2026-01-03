@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../component/Navbar";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import publicApi from "../pages/api/publicApi.js"
 
 function CheckOut() {
   const [error, setError] = useState("");
@@ -62,8 +61,8 @@ function CheckOut() {
     console.log("change", change);
 
     try {
-      const AddResponse = await axios.post(
-        "http://localhost:8080/api/address",
+      const AddResponse = await publicApi.post(
+        "/api/address",
         change,
         {
           withCredentials: true,
@@ -84,18 +83,16 @@ function CheckOut() {
   };
 
   const getCart = async () => {
-    const getCartItem = await axios.get("http://localhost:8080/api/cart/get", {
+    const getCartItem = await publicApi.get("/api/cart/get", {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-    // console.log("cartResponseItem", getCartItem.data.data.items);
     const cartData = getCartItem.data.data.items;
     setCartItems(cartData);
     console.log("cartItem", cartItem);
 
-    // console.log("A",cartData);
   };
 
   useEffect(() => {
@@ -107,13 +104,12 @@ function CheckOut() {
 
   const getResponse = async () => {
 
-    const response = await axios.get("http://localhost:8080/api/address", {
+    const response = await publicApi.get("/api/address", {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-    // console.log("response 1111111", response);
     setAddress(response.data.data);
   };
 
@@ -136,7 +132,7 @@ function CheckOut() {
  const deletedAddress = async(addressId) => {
   const token = localStorage.getItem("token")
  try {
-   const res = await axios.delete(`http://localhost:8080/api/address/removeAddress/${addressId}`,{
+   const res = await publicApi.delete(`/api/address/removeAddress/${addressId}`,{
      headers : {
        Authorization : `Bearer ${token}`,
        "Content-Type" : "application/json"
@@ -155,10 +151,6 @@ function CheckOut() {
  }
  
 
-  
-  
-  
-
   const handlePlaceOrder = async() => {
     if(!selectedId || !selectedPayment){
       setError("Please select address and Payment option first")
@@ -169,7 +161,7 @@ function CheckOut() {
     selectedPayment: selectedPayment,
   }
     try {
-      const postOrder = await axios.post("http://localhost:8080/api/order",orderData,{
+      const postOrder = await publicApi.post("/api/order",orderData,{
         headers : {
           Authorization : `Bearer ${token}`,
           "Content-Type" : "application/json"

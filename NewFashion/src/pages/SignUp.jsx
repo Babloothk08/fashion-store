@@ -1,8 +1,9 @@
-import axios from "axios";
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import publicApi from "../pages/api/publicApi.js"
 
 function SignUp() {
   const [change, setChange] = useState({
@@ -25,8 +26,8 @@ function SignUp() {
     console.log("cc", change);
 
     try {
-      const getResponse = await axios.post(
-        "http://localhost:8080/api/register",
+      const getResponse = await publicApi.post(
+        "/api/register",
         change,
         {
           headers: {
@@ -35,9 +36,8 @@ function SignUp() {
         }
       );
       console.log("registration successful", getResponse.data);
-      // console.log("gettt", getResponse);
 
-      // ✅ Success message
+     
       toast.success(getResponse.data.message);
 
       // navigate to login page after 2 sec delay (so user sees popup)
@@ -55,7 +55,7 @@ function SignUp() {
         toast.error(error.response.data.message);
       } else {
         // agar backend se kuch bhi nahi mila (network error etc.)
-        toast.error("Something went wrong ❌");
+        toast.error("Something went wrong ");
       }
     }
 

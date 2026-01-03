@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../component/Navbar";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import publicApi from "../pages/api/publicApi";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -18,24 +17,20 @@ function Profile() {
     if (!token) return;
 
     try {
-      const response = await axios.get("http://localhost:8080/api/profile", {
+      const response = await publicApi.get("/api/profile", {
         headers: {
-          Authorization: `Bearer ${token}`, // ✅ Bearer token sahi jagah
+          Authorization: `Bearer ${token}`, 
         },
       });
       console.log("Profile Response:", response.data);
       setUser(response.data.data);
-      // console.log("User", user);
-      
+      setName(response.data.data)
       setMobile(response.data.data.mobile);
-      // console.log("mobile",mobile);
       
       setAddress(response.data.data.address);
       setName(response.data.data.name);
-      // console.log("name",name);
       
       setLastName(response.data.data.lastName);
-      // console.log("lastnname", lastName);
       
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -49,15 +44,13 @@ function Profile() {
   const handleUpdate = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.put(
-        "http://localhost:8080/api/profile",
+      const response = await publicApi.put(
+        "/api/profile",
         { name, lastName, email: user.email, mobile, address },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log("Update Response:", response.data);
+      // console.log("Update Response:", response.data);
 
-      // ✅ Update UI with latest data
-      // setUser(response.data.data);
       const updatedUser = response.data.data;
       console.log("updatedUsr", updatedUser);
       
@@ -84,7 +77,6 @@ useEffect(()=>{
 
   return (
     <>
-      <Navbar />
       <div className="flex flex-col md:flex-row gap-2 mt-[75px] md:px-20 w-full">
         {/* Left Part */}
         <div className="w-full md:w-[30%] ">

@@ -22,13 +22,20 @@ import adminRouter from "./routes/route.Admin.js"
 
 // app.use(cors())
 app.use(cors({
-  origin : "http://localhost:5173",
+  origin : [
+    "http://localhost:5173",
+    "https://fashion-store-neon-kappa.vercel.app",
+     
+  ],
   credentials : true,
 }));
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API is working");
 });
+
+
+
 
             
 app.use("/api", userRouter);

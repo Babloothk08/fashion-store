@@ -1,10 +1,8 @@
 import React from 'react'
-import Navbar from '../component/Navbar'
 
 function Contact() {
   return (
     <>
-     <Navbar/>
      <div className='bg-[url("https://www.jockey.in/cdn/shop/files/4-WOW-Desktop.webp?v=1750847944&width=1600")] bg-center bg-cover w-full h-40 md:h-[500px]   text-start content-center md:pl-20 mt-15'></div>
       <div className='flex flex-col flex-wrap text-center mt-20 py-8 gap-8 bg-[url("https://im.uniqlo.com/global-cms/spa/res14b211448e71458d65022e07451b7507fr.jpg")]bg-cover bg-center '>
       <div className='text-center text-4xl font-semibold'>

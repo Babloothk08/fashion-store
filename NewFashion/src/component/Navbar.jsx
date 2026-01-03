@@ -6,7 +6,7 @@ import { IoCartSharp } from "react-icons/io5";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+import publicApi from "../pages/api/publicApi.js";
 
 function Navbar({search, setSearch, handleSearch}) {
   const [open, setOpen] = useState();
@@ -20,17 +20,12 @@ function Navbar({search, setSearch, handleSearch}) {
 
 
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   alert("Logged out successfully!");
-  //   navigate("/");
-  // };
-
+ 
    const handleLogout = async () => {
      const token = localStorage.getItem("token");
       try {
-        const response = await axios.post(
-          "http://localhost:8080/api/logOut", // ✅ lowercase route
+        const response = await publicApi.post(
+          "/api/logOut", 
           {},
           {
             headers: {
@@ -97,18 +92,7 @@ function Navbar({search, setSearch, handleSearch}) {
         >
           ABOUT
         </NavLink>
-        {/* <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
-              isActive
-                ? "scale-120 underline underline-offset-8 font-bold text-[#4DA6FF] text-shadow-lg "
-                : ""
-            }`
-          }
-        >
-          CONTACT
-        </NavLink> */}
+       
       </div>
       <div className="flex  gap-8 items-center text-10 ml-auto cursor-pointer max-sm:hidden max-md:hidden">
         <div className="flex w-60 h-8 rounded-full pl-4 bg-neutral-100 gap-3 items-center ">

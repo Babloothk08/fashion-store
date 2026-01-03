@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { increaseQuantity, decreaseQuantity, removeItem } from "../features/cart/cartSlice";
-import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
+
 
 function AllItems() {
 
@@ -23,7 +23,6 @@ function AllItems() {
   return (
     
    <>
-    <Navbar/>
     <div className="flex flex-wrap justify-around max-w-full mt-10 py-10 max-sm:gap-20 mx-10 md:mx-10">
    
       <div className="w-full md:w-2/3  flex flex-col max-sm:pb-15 gap-20"> 

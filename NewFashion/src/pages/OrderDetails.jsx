@@ -1,21 +1,14 @@
 import { CheckCircle } from "lucide-react";
-import Navbar from "../component/Navbar";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import publicApi from "../pages/api/publicApi.js"
 
 function Order() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
-  if (!token) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <p className="text-lg font-semibold">Please login to view orders</p>
-      </div>
-    );
-  }
+  
 
   useEffect(() => {
     if (!token) {
@@ -23,7 +16,7 @@ function Order() {
       return;
     }
     const fetchOrders = async () => {
-      const res = await axios.get("http://localhost:8080/api/orderDetails", {
+      const res = await publicApi.get("/api/orderDetails", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -34,17 +27,24 @@ function Order() {
       setData(res.data.data);
     };
     fetchOrders();
-  }, [token]);
+  }, [token, navigate]);
 
-  const totalPrice = (items = []) =>
-    items.reduce(
-      (acc, item) => acc + (item.product?.price || 0) * item.quantity,
-      0
+  // const totalPrice = (items = []) =>
+  //   items.reduce(
+  //     (acc, item) => acc + (item.product?.price || 0) * item.quantity,
+  //     0
+  //   );
+
+    if (!token) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <p className="text-lg font-semibold">Please login to view orders</p>
+      </div>
     );
+  }
 
   return (
     <>
-      <Navbar />
 
       <div className="max-w-9xl mx-auto px-4 py-10 mt-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch">
@@ -89,7 +89,7 @@ function Order() {
                           ).toDateString()}
                         </p>
                       </div>
-                      {/* <div> */}
+                      
                         {order.addressId ? (
                           <div>
                             <h1 className="font-semibold">Delivery Address</h1>
@@ -106,7 +106,7 @@ function Order() {
                             Address not available
                           </p>
                         )}
-                      {/* </div> */}
+                     
                     </div>
                   ))
                 )}
