@@ -12,20 +12,7 @@ export const addProduct = async(req, res) => {
             return res.status(400).json({message : "All fields are required"})
         }
 
-       
-        // const existedProduct = await Product.findOne({
-        //     $or: [{ name }, { heading }]
-        // })
-
-        // if(existedProduct){
-        //     return res.status(401).json({message : "product already exist"});
-        // }
-
         const avatarLocalPath = req.files?.avatar?.[0].path;
-        // const coverImageLocalPath = req.files?.coverImage?.[0].path;
-        //  console.log(avatarLocalPath)
-        // console.log(coverImageLocalPath)
-      
 
         if(!avatarLocalPath){
            return  res.status(400).json({message: "Avatar file is required"})

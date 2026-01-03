@@ -25,6 +25,7 @@ app.use(cors({
   origin : [
     "http://localhost:5173",
     "https://fashion-store-neon-kappa.vercel.app",
+    "*"
      
   ],
   credentials : true,
@@ -39,7 +40,7 @@ app.get("/", (req, res) => {
 
             
 app.use("/api", userRouter);
-app.use("/api", productRouter);
+app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/address", addressRouter)
 app.use("/api", orderRouter )

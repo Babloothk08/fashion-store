@@ -21,7 +21,7 @@ router.post(
   ]),
   addProduct
 );
-// router.get("/", allData);
-router.route('/data').get(allData)
-router.route('/search', searchProduct)
+router.get("/", allData);
+// router.route('/data').get(allData)
+router.get('/search', searchProduct)
 export default router
