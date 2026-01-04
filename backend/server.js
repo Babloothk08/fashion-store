@@ -25,6 +25,7 @@ app.use(cors({
   origin : [
     "http://localhost:5173",
     "https://fashion-store-frontend-5jru.onrender.com",
+    "https://fashion-store-neon-kappa.vercel.app",
   ],
   credentials : true,
 }));
