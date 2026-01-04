@@ -24,9 +24,7 @@ import adminRouter from "./routes/route.Admin.js"
 app.use(cors({
   origin : [
     "http://localhost:5173",
-    "https://fashion-store-neon-kappa.vercel.app",
-    "*"
-     
+    "https://fashion-store-frontend-5jru.onrender.com",
   ],
   credentials : true,
 }));
