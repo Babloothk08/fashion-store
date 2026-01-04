@@ -15,7 +15,7 @@ function Data() {
   
   const fetchData = async () => {
     try {
-      const response = await publicApi.get("/api/data", {
+      const response = await publicApi.get("/api/products", {
         headers: {
           "Content-Type": "application/json",
         },

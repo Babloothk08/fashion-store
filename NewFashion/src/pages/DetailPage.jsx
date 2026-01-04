@@ -16,7 +16,7 @@ function DetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await publicApi.get("/api/data");
+        const response = await publicApi.get("/api/products");
         const product = response.data.find((item) => item._id === id);
         setData(product);
         setSinglePage(product?.avatar);

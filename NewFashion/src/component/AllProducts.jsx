@@ -10,7 +10,7 @@ function AllProducts() {
   console.log("allProducts", data);
   useEffect(() => {
     const getResponse = async () => {
-      const response = await publicApi.get("/api/data", {
+      const response = await publicApi.get("/api/products", {
         headers: {
           "Content-Type": "application/json",
         },
