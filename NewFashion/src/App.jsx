@@ -43,7 +43,7 @@ function App() {
         return;
       }
         try {
-          const res =await publicApi.get(`/search?q=${search}`)
+          const res =await publicApi.get(`/api/products/search?q=${search}`)
            setSearchProduct(res.data);
            navigate("/searchPage");
         } catch (error) {
