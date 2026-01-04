@@ -341,21 +341,30 @@ export const resetPassword = async (req, res) => {
   try {
     const { email, newPassword } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!email || !newPassword) {
+      return res.status(400).json({ message: "Missing fields" });
+    }
 
-    const saltRounds = 10;
-    user.password = await bcrypt.hash(newPassword, saltRounds);
-    user.resetOTP = undefined;
-    user.resetOTPExpiry = undefined;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.resetOTP || user.resetOTPExpiry) {
+      return res.status(400).json({ message: "OTP not verified yet" });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
 
-    res.status(200).json({ message: "Password reset successful" });
+    return res.status(200).json({ message: "Password reset successful ✔" });
+
   } catch (error) {
     console.log("Reset password error:", error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
+
 
   
 
@@ -364,43 +373,49 @@ export const resetPassword = async (req, res) => {
 export const sendOTP = async (req, res) => {
   try {
     const { email } = req.body;
+    console.log("Forgot password email:", email);
 
     const user = await User.findOne({ email });
-    if (!user)
+    if (!user) {
       return res.status(404).json({ message: "Email not found" });
+    }
 
-    // Generate 6 digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    console.log("Generated OTP:", otp);
 
-    // Save OTP with expiry (5 minutes)
     user.resetOTP = otp;
     user.resetOTPExpiry = Date.now() + 5 * 60 * 1000;
     await user.save();
 
-    // Mail transporter
+    console.log("EMAIL_USER:", process.env.EMAIL_USER);
+    console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS.replace(/\s/g, ""),
+        pass: process.env.EMAIL_PASS,
       },
     });
 
-    const mailOptions = {
+    await transporter.verify(); // 🔥 THIS WILL TELL EXACT ERROR
+    console.log("Transporter verified");
+
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Your OTP Code",
       text: `Your OTP is ${otp}. It expires in 5 minutes.`,
-    };
-
-    await transporter.sendMail(mailOptions);
+    });
 
     return res.status(200).json({ message: "OTP sent successfully" });
+
   } catch (error) {
-    console.log("OTP Error:", error);
-    return res.status(500).json({ message: "Server error" });
+    console.error("SEND OTP ERROR ⛔", error);
+    return res.status(500).json({ message: "OTP sending failed" });
   }
 };
+
 
 
 
@@ -412,7 +427,6 @@ export const verifyOTP = async (req, res) => {
     if (!user)
       return res.status(404).json({ message: "User not found" });
 
-    // OTP invalid?
     if (
       user.resetOTP !== otp ||
       user.resetOTPExpiry < Date.now()
@@ -420,44 +434,8 @@ export const verifyOTP = async (req, res) => {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
 
-    // Generate new random password
-    const newPassword = Math.random().toString(36).slice(-8);
-
-    // Hash password
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
-
-    // Save new data
-    user.password = hashedPassword;
-    user.resetOTP = undefined;
-    user.resetOTPExpiry = undefined;
-    await user.save();
-
-    // Send email with new password
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS.replace(/\s/g, ""),
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "Your New Password",
-        html: `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
-
-      <p>Hi<strong>${user.name}</strong>,</p>
-    </div>
-  `
-    };
-
-    await transporter.sendMail(mailOptions);
-
     return res.status(200).json({
-      message: "OTP verified. New password sent to email ✔",
+      message: "OTP verified successfully ✔",
     });
 
   } catch (error) {
@@ -467,37 +445,4 @@ export const verifyOTP = async (req, res) => {
 };
 
 
-// export const userProfile = await User.aggregate([
-//       { $match: { _id: new mongoose.Types.ObjectId(userId) } },
-//       {
-//         $lookup: {
-//           from: "addresses", // make sure this matches your addresses collection name
-//           localField: "_id",
-//           foreignField: "userId",
-//           as: "addresses",
-//           pipeline: [
-//             {
-//               $project: {
-//                 _id: 0,         // optional, remove _id from address objects
-//                 fullName: 1,
-//                 state: 1,
-//                 city: 1,
-//                 address: 1,
-//                 phone: 1,
-//                 pinCode: 1,
-//               },
-//             },
-//           ],
-//         },
-//       },
-//       {
-//         $project: {
-//           _id: 0,
-//           fullName: 1,
-//           email: 1,
-//           createdAt: 1,
-//           updatedAt: 1,
-//           addresses: 1,
-//         },
-//       },
-//     ]);
+
