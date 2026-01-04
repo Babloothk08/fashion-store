@@ -43,7 +43,7 @@ function Navbar({search, setSearch, handleSearch}) {
     setOpen(!open);
   };
   return (
-    <div className="fixed top-0 m-0 z-20 h-18 items-center text-center w-full flex justify-between  px-3  bg-white-800 shadow-xl bg-white max-sm:flex max-sm:justify-between ">
+    <div className="fixed top-0 m-0 z-20 h-18 items-center text-center w-full flex justify-between  px-3  bg-white-800 shadow-xl bg-white max-sm:flex max-sm:justify-between max-sm:px-3">
       <div className="  cursor-pointer ">
         <Link to="/home" className="text-2xl font-bold">
           FashionStore

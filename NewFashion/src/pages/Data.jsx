@@ -64,7 +64,7 @@ function Data() {
     <>
      <div>
       <div className="mt-18">
-      <img src="https://cms.landmarkshops.in/cdn-cgi/image/w=1232,q=85,fit=cover/LS-Fest/LS-new/desktop-dept-6modblk-oneBythree-A-Women-15Oct25.jpg" alt="" className="w-[100vw] object-cover max-sm:object-center sm:object-center h-90" />
+      <img src="https://cms.landmarkshops.in/cdn-cgi/image/w=1232,q=85,fit=cover/LS-Fest/LS-new/desktop-dept-6modblk-oneBythree-A-Women-15Oct25.jpg" alt="" className="w-full object-cover obejct-center max-sm:object-center h-90 max-sm:h-50" />
      </div>
    
     <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10">
