@@ -11,7 +11,7 @@ function ForgotPassword() {
 
   const navigate = useNavigate()
 
-  // 1️⃣ Send OTP
+  // Send OTP
   const handleSendOTP = async () => {
     try {
       const res = await publicApi.post("/api/forgot-password", { email });
@@ -23,18 +23,19 @@ function ForgotPassword() {
     }
   };
 
-  // 2️⃣ Verify OTP
+  // Verify OTP
   const handleVerifyOTP = async () => {
     try {
       const res = await publicApi.post("/api/verify-otp", { email, otp });
       toast.success(res.data.message);
+      console.log("OTP verify response", res);
       setStep(3);
     } catch (err) {
       toast.error(err.response?.data?.message || "Invalid OTP");
     }
   };
 
-  // 3️⃣ Reset Password
+  // Reset Password
   const handleResetPassword = async () => {
     try {
       const res = await publicApi.post("/api/reset-password", { email, newPassword });
@@ -43,7 +44,9 @@ function ForgotPassword() {
       setEmail("");
       setOtp("");
       setNewPassword("");
-      navigate('/')  
+      setTimeout(()=>{
+        navigate('/')
+      },1500)  
     } catch (err) {
       toast.error(err.response?.data?.message || "Error resetting password");
     }

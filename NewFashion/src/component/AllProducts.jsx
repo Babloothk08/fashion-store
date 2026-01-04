@@ -21,7 +21,7 @@ function AllProducts() {
   }, []);
 
   return (
-    <div className=" grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 ">
+    <div className=" grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 pt-10">
       {data.map((item, index) => (
         <motion.div
           key={item._id}

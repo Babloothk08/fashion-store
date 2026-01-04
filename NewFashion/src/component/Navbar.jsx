@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
@@ -9,16 +9,12 @@ import { ToastContainer, toast } from "react-toastify";
 import publicApi from "../pages/api/publicApi.js";
 
 function Navbar({search, setSearch, handleSearch}) {
-  const [open, setOpen] = useState();
-
-  
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
 
   const cart = useSelector((state) => state.cart.items);
   const uniqueCount = cart.length;
-
-
+  const isLoggedIn = !!localStorage.getItem("token");
 
  
    const handleLogout = async () => {
@@ -49,14 +45,13 @@ function Navbar({search, setSearch, handleSearch}) {
   return (
     <div className="fixed top-0 m-0 z-20 h-18 items-center text-center w-full flex justify-between  px-3  bg-white-800 shadow-xl bg-white max-sm:flex max-sm:justify-between ">
       <div className="  cursor-pointer ">
-        <img
-          src="https://t3.ftcdn.net/jpg/16/60/75/60/240_F_1660756002_ii43fIj08wo6bbFdWbxmMD7zsZFoUxpR.jpg"
-          alt="logo"
-          className="h-16 w-24  max-sm:h-12 max-sm:w-16 max-sm:px-0 max-md:h-12 max-md:w-16 max-md:px-4"
-        />
+        <Link to="/home" className="text-2xl font-bold">
+          FashionStore
+        </Link>
       </div>
-      <div className="flex  ml-auto gap-18 cursor-pointer max-sm:pl-2 max-sm:gap-4">
-        <NavLink
+      <div className="flex  ml-auto gap-18 cursor-pointer max-sm:pl-2 max-sm:gap-4 ">
+        <div className="max-sm:hidden">
+          <NavLink
           to="/home"
           className={({ isActive }) =>
             ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
@@ -68,9 +63,12 @@ function Navbar({search, setSearch, handleSearch}) {
         >
           Home
         </NavLink>
-        <NavLink
+        </div>
+
+        <div className="">
+          <NavLink
           to="/data"
-          className={({ isActive }) =>
+          className= {({ isActive }) =>
             ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
               isActive
                 ? "scale-120 underline underline-offset-8 font-bold text-[#4DA6FF] text-shadow-lg "
@@ -80,7 +78,10 @@ function Navbar({search, setSearch, handleSearch}) {
         >
           SHOP
         </NavLink>
-        <NavLink
+        </div>
+
+        <div className="max-sm:hidden">
+          <NavLink
           to="/about"
           className={({ isActive }) =>
             ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
@@ -92,10 +93,11 @@ function Navbar({search, setSearch, handleSearch}) {
         >
           ABOUT
         </NavLink>
+        </div>
        
       </div>
-      <div className="flex  gap-8 items-center text-10 ml-auto cursor-pointer max-sm:hidden max-md:hidden">
-        <div className="flex w-60 h-8 rounded-full pl-4 bg-neutral-100 gap-3 items-center ">
+      <div className="flex  gap-8 items-center text-10 ml-auto cursor-pointer  ">
+        <div className="flex w-60 h-8 rounded-full pl-4 bg-neutral-100 gap-3 items-center max-sm:hidden">
           <IoSearch onClick={handleSearch}/>
           <input
             type="text"
@@ -110,13 +112,13 @@ function Navbar({search, setSearch, handleSearch}) {
           />
           
         </div>
-        <div className="flex gap-8  max-lg:hidden">
-          <FaRegHeart className="cursor-pointer" />
+        <div className="flex gap-8 ">
+          <FaRegHeart className="cursor-pointer max-sm:hidden" />
 
           <div className="relative">
-            <CgProfile className="cursor-pointer " onClick={visible} />
+            <CgProfile className="cursor-pointer max-sm:text-xl" onClick={visible} />
             {open && (
-              <div className="mt-8 p-3 bg-amber-500 text-white font-bold rounded-2xl  w-30 h-38 absolute  left-[-50px]">
+              <div className="mt-7  bg-amber-500 text-white p-2 font-bold rounded-2xl  w-30 h-25 absolute  left-[-50px]">
                 <Link to="/profile">
                   <p
                     className="cursor-pointer hover:text-amber-600"
@@ -125,14 +127,21 @@ function Navbar({search, setSearch, handleSearch}) {
                     Profiles
                   </p>
                 </Link>
-                {/* <Link to="/product">
+
+               {isLoggedIn ? (
+                 <Link to="/">
                   <p
                     className="cursor-pointer hover:text-amber-600"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                      handleLogout();
+                    }}
                   >
-                    Admin
+                    Log Out
                   </p>
-                </Link> */}
+                </Link>
+               ): (
+                <>
                 <Link to="/">
                   <p
                     className="cursor-pointer hover:text-amber-600"
@@ -149,25 +158,8 @@ function Navbar({search, setSearch, handleSearch}) {
                     Sign Up
                   </p>
                 </Link>
-                <Link to="/userCart">
-                  <p
-                    className="cursor-pointer hover:text-amber-600"
-                    onClick={() => setOpen(false)}
-                  >
-                    UserCart
-                  </p>
-                </Link>
-                <Link to="/">
-                  <p
-                    className="cursor-pointer hover:text-amber-600"
-                    onClick={() => {
-                      setOpen(false);
-                      handleLogout();
-                    }}
-                  >
-                    Log Out
-                  </p>
-                </Link>
+                </>
+               )}
               </div>
             )}
           </div>
