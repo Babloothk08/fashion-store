@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, {   useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
