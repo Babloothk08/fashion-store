@@ -21,16 +21,16 @@ export const verifyJWT = async (req, res, next) => {
     // (joki actual token hai)
     
 
-    // 3. Verify karo
+    // Verify karo
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-    // 4. User dhoondo
+    // User dhoondo
     const user = await User.findById(decodedToken.id); // 👈 "id", not "_id"
     if (!user) {
       return res.status(404).json("User not found");
     }
 
-    // 5. Attach user to req
+    // Attach user to req
     req.user = user;
     next();
 

@@ -3,7 +3,7 @@ import { Order } from "../models/model.Order.js";
 import { Cart } from "../models/model.Cart.js";
 import { Product } from "../models/model.Product.js";
 
-// 1️⃣ Get all users with order summary
+// Get all users with order summary
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({ role: "user" }).select("-password -__v");

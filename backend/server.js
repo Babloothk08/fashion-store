@@ -18,6 +18,7 @@ import cartRouter from "./routes/route.Cart.js"
 import addressRouter from "./routes/route.Address.js"
 import orderRouter from "./routes/route.Order.js"
 import adminRouter from "./routes/route.Admin.js"
+import managerRouter from "./routes/route.manager.js"
 
 
 // app.use(cors())
@@ -28,6 +29,7 @@ app.use(cors({
   ],
   credentials : true,
 }));
+app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API is working");
@@ -43,6 +45,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/address", addressRouter)
 app.use("/api", orderRouter )
 app.use("/api", adminRouter)
+app.use("/api", managerRouter)
 connectDB()
 
 app.listen(PORT,() =>{
