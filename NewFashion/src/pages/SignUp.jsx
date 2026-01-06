@@ -70,12 +70,12 @@ function SignUp() {
   return (
     <div className="w-full  min-h-screen  pt-5    flex flex-col justify-center  items-center shadow-md bg-[url('https://im.uniqlo.com/global-cms/spa/res24ab4b5656b77c964dadd271276af132fr.jpg')] bg-cover bg-center">
       <form onSubmit={handleSubmit}>
-        <div className="w-full max-w-2xl rounded-2xl shadow-2xl bg-red-100  p-5 flex flex-col justify-start gap-2 ">
-          <h1 className="text-3xl  font-semibold text-center ">
+        <div className="w-full max-w-xl max-sm:w-72 rounded-2xl shadow-lg bg-red-100  p-2 flex flex-col justify-start gap-2 max-sm:gap-1 ">
+          <h1 className="text-3xl max-sm:text-xl  font-semibold text-center ">
             Registration{" "}
           </h1>
-          <div className="flex  justify-center flex-wrap gap-5 ">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex  justify-center flex-wrap gap-5 max-sm:gap-1 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-sm:gap-1">
               <div className="flex flex-col gap-2">
                  <label className="text-xl font-semibold">Name</label>
                 <input
@@ -99,7 +99,7 @@ function SignUp() {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-sm:gap-1">
               <div className="flex flex-col gap-2">
                 <label className="text-xl font-semibold">Email</label>
                 <input
@@ -129,7 +129,7 @@ function SignUp() {
           <div className="text-white text-center pt-3  text-3xl  h-16 rounded-xl cursor-pointer">
             <button
               type="submit"
-              className="cursor-pointer text-3xl w-50 h-13 rounded-xl font-bold bg-yellow-600"
+              className="cursor-pointer text-3xl w-50 max-sm:w-40 max-sm:h-10 h-13 rounded-xl font-bold bg-yellow-600"
             >
               Continue
             </button>
