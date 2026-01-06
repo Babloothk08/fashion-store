@@ -63,7 +63,7 @@ function Data() {
   return (
     <>
      <div>
-      <div className="mt-18">
+      <div className="mt-13">
       <img src="https://cms.landmarkshops.in/cdn-cgi/image/w=1232,q=85,fit=cover/LS-Fest/LS-new/desktop-dept-6modblk-oneBythree-A-Women-15Oct25.jpg" alt="" loading="eager" fetchpriority="high"className="w-full object-cover obejct-center max-sm:object-center h-90 max-sm:h-50" />
      </div>
    

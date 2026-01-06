@@ -37,141 +37,126 @@ function Navbar({ search, setSearch, handleSearch }) {
     }
   };
 
-  const visible = () => {
-    setOpen(!open);
-  };
+
   return (
-    <div className="fixed top-0 m-0 z-20 h-18 items-center text-center w-full flex justify-between  px-3  bg-white-800 shadow-xl bg-white max-sm:flex max-sm:justify-between max-sm:px-3">
-      <div className="  cursor-pointer ">
-        <Link to="/home" className="text-2xl font-bold">
-          FashionStore
-        </Link>
-      </div>
-      <div className="flex  ml-auto gap-18 cursor-pointer max-sm:pl-2 max-sm:gap-4 ">
-        <div className="max-sm:hidden">
-          <NavLink
-            to="/home"
-            className={({ isActive }) =>
-              ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
-                isActive
-                  ? "scale-120 underline underline-offset-8 font-bold text-[#4DA6FF] text-shadow-lg "
-                  : ""
-              }`
-            }
-          >
-            Home
-          </NavLink>
-        </div>
+  <header className="fixed top-0 z-30 w-full bg-gradient-to-r from-slate-600 via-slate-800 to-slate-900 shadow-lg">
+    <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
 
-        <div className="">
-          <NavLink
-            to="/data"
-            className={({ isActive }) =>
-              ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
-                isActive
-                  ? "scale-120 underline underline-offset-8 font-bold text-[#4DA6FF] text-shadow-lg "
-                  : ""
-              }`
-            }
-          >
-            SHOP
-          </NavLink>
-        </div>
+      <Link
+        to="/home"
+        className="text-2xl sm:text-3xl font-extrabold tracking-wide"
+      >
+        <span className="text-white">Fashion</span>
+        <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
+          Store
+        </span>
+      </Link>
 
-        <div className="max-sm:hidden">
+      <nav className="hidden md:flex gap-10 text-sm font-semibold text-gray-300">
+        {[
+          { name: "Home", path: "/home" },
+          { name: "Shop", path: "/data" },
+          { name: "About", path: "/about" },
+        ].map((item) => (
           <NavLink
-            to="/about"
+            key={item.name}
+            to={item.path}
             className={({ isActive }) =>
-              ` cursor-pointer transition-transform hover:scale-120 hover:underline hover:underline-offset-8 hover:font-bold hover:text-[#4DA6FF] hover:text-shadow-lg  ${
+              `transition-all hover:text-orange-400 ${
                 isActive
-                  ? "scale-120 underline underline-offset-8 font-bold text-[#4DA6FF] text-shadow-lg "
+                  ? "text-orange-400 border-b-2 border-orange-400 pb-1"
                   : ""
               }`
             }
           >
-            ABOUT
+            {item.name}
           </NavLink>
-        </div>
-      </div>
-      <div className="flex  gap-8 items-center text-10 ml-auto cursor-pointer  ">
-        <div className="flex w-60 h-8 rounded-full pl-4 bg-neutral-100 gap-3 items-center max-sm:hidden">
-          <IoSearch onClick={handleSearch} />
+        ))}
+      </nav>
+
+      <div className="flex items-center gap-4 sm:gap-6">
+
+        <div className="hidden lg:flex items-center gap-2 bg-slate-700 px-3 py-1.5 rounded-full">
+          <IoSearch
+            className="text-gray-300 cursor-pointer"
+            onClick={handleSearch}
+          />
           <input
             type="text"
-            placeholder="Search your products"
-            className="focus:outline-none"
+            placeholder="Search products"
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
+            onChange={(e) => setSearch(e.target.value)}
+            className="bg-transparent text-sm focus:outline-none text-white placeholder-gray-400 w-40"
           />
         </div>
-        <div className="flex gap-8 ">
-          <FaRegHeart className="cursor-pointer max-sm:hidden" />
 
-          <div className="relative">
-            <CgProfile
-              className="cursor-pointer max-sm:text-xl"
-              onClick={visible}
-            />
-            {open && (
-              <div className={isLoggedIn ? "mt-7  bg-amber-500 text-white p-2 font-bold rounded-2xl  w-28 h-18 absolute  left-[-50px]" : "mt-7  bg-amber-500 text-white p-2 font-bold rounded-2xl  w-28 h-23 absolute  left-[-50px]"}>
-                <Link to="/profile">
-                  <p
-                    className="cursor-pointer hover:text-red-600"
-                    onClick={() => setOpen(false)}
-                  >
-                    Profiles
-                  </p>
-                </Link>
+        <FaRegHeart className="hidden sm:block text-xl text-gray-300 hover:text-orange-400 cursor-pointer" />
 
-                {isLoggedIn ? (
+        <div className="relative">
+          <CgProfile
+            className="text-2xl text-gray-300 hover:text-orange-400 cursor-pointer"
+            onClick={() => setOpen(!open)}
+          />
+
+          {open && (
+            <div className="absolute right-0 mt-3 w-36 rounded-xl bg-white text-gray-800 shadow-xl text-sm overflow-hidden">
+              <Link to="/profile">
+                <p
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => setOpen(false)}
+                >
+                  Profile
+                </p>
+              </Link>
+
+              {isLoggedIn ? (
+                <p
+                  onClick={() => {
+                    setOpen(false);
+                    handleLogout();
+                  }}
+                  className="px-4 py-2 hover:bg-red-100 text-red-600 cursor-pointer"
+                >
+                  Logout
+                </p>
+              ) : (
+                <>
                   <Link to="/">
                     <p
-                      className="cursor-pointer hover:text-red-600"
-                      onClick={() => {
-                        setOpen(false);
-                        handleLogout();
-                      }}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setOpen(false)}
                     >
-                      Log Out
+                      Sign In
                     </p>
                   </Link>
-                ) : (
-                  <>
-                    <Link to="/">
-                      <p
-                        className="cursor-pointer hover:text-red-600"
-                        onClick={() => setOpen(false)}
-                      >
-                        Sign In
-                      </p>
-                    </Link>
-                    <Link to="/signUp">
-                      <p
-                        className="cursor-pointer hover:text-red-600"
-                        onClick={() => setOpen(false)}
-                      >
-                        Sign Up
-                      </p>
-                    </Link>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-          <Link to="/userCart" className="relative ">
-            <IoCartSharp className="cursor-pointer text-xl " />
-            {uniqueCount > 0 && (
-              <span className="absolute -top-4  -right-1 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                {uniqueCount}
-              </span>
-            )}
-          </Link>
+                  <Link to="/signUp">
+                    <p
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Sign Up
+                    </p>
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
         </div>
+
+        <Link to="/userCart" className="relative">
+          <IoCartSharp className="text-2xl text-gray-300 hover:text-orange-400" />
+          {uniqueCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold px-2 rounded-full">
+              {uniqueCount}
+            </span>
+          )}
+        </Link>
       </div>
     </div>
-  );
+  </header>
+);
+
+
 }
 
 export default Navbar;
