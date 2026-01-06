@@ -64,7 +64,7 @@ function Data() {
     <>
      <div>
       <div className="mt-18">
-      <img src="https://cms.landmarkshops.in/cdn-cgi/image/w=1232,q=85,fit=cover/LS-Fest/LS-new/desktop-dept-6modblk-oneBythree-A-Women-15Oct25.jpg" alt="" className="w-full object-cover obejct-center max-sm:object-center h-90 max-sm:h-50" />
+      <img src="https://cms.landmarkshops.in/cdn-cgi/image/w=1232,q=85,fit=cover/LS-Fest/LS-new/desktop-dept-6modblk-oneBythree-A-Women-15Oct25.jpg" alt="" loading="eager" fetchpriority="high"className="w-full object-cover obejct-center max-sm:object-center h-90 max-sm:h-50" />
      </div>
    
     <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10">
@@ -81,14 +81,14 @@ function Data() {
         viewport={{once:true, amount:0.2}}
         className="w-full pt-10 flex flex-col justify-center"
         >
-        {/* <div
-          key={item.id}
-          className="rounded-2xl  w-75 flex-col  overflow-hidden bg-white shadow-lg"
-        > */}
+        
           <Link to={`/detailPage/${item._id}`}>
             <img
               src={item.avatar}
               alt={item.title}
+              loading={index < 4 ? "eager" : "lazy"}
+              width="320"
+              height="320"
               className="cursor-pointer transition-transform duration-300 hover:scale-105 rounded-2xl w-80 h-70 object-center"
             />
           </Link>

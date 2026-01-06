@@ -115,10 +115,10 @@ function Navbar({ search, setSearch, handleSearch }) {
               onClick={visible}
             />
             {open && (
-              <div className="mt-7  bg-amber-500 text-white p-2 font-bold rounded-2xl  w-30 h-25 absolute  left-[-50px]">
+              <div className={isLoggedIn ? "mt-7  bg-amber-500 text-white p-2 font-bold rounded-2xl  w-28 h-18 absolute  left-[-50px]" : "mt-7  bg-amber-500 text-white p-2 font-bold rounded-2xl  w-28 h-23 absolute  left-[-50px]"}>
                 <Link to="/profile">
                   <p
-                    className="cursor-pointer hover:text-amber-600"
+                    className="cursor-pointer hover:text-red-600"
                     onClick={() => setOpen(false)}
                   >
                     Profiles
@@ -128,7 +128,7 @@ function Navbar({ search, setSearch, handleSearch }) {
                 {isLoggedIn ? (
                   <Link to="/">
                     <p
-                      className="cursor-pointer hover:text-amber-600"
+                      className="cursor-pointer hover:text-red-600"
                       onClick={() => {
                         setOpen(false);
                         handleLogout();
@@ -141,7 +141,7 @@ function Navbar({ search, setSearch, handleSearch }) {
                   <>
                     <Link to="/">
                       <p
-                        className="cursor-pointer hover:text-amber-600"
+                        className="cursor-pointer hover:text-red-600"
                         onClick={() => setOpen(false)}
                       >
                         Sign In
@@ -149,7 +149,7 @@ function Navbar({ search, setSearch, handleSearch }) {
                     </Link>
                     <Link to="/signUp">
                       <p
-                        className="cursor-pointer hover:text-amber-600"
+                        className="cursor-pointer hover:text-red-600"
                         onClick={() => setOpen(false)}
                       >
                         Sign Up

@@ -10,11 +10,7 @@ function AllProducts() {
   console.log("allProducts", data);
   useEffect(() => {
     const getResponse = async () => {
-      const response = await publicApi.get("/api/products", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await publicApi.get("/api/products");
       setData(response.data);
     };
     getResponse();
@@ -41,7 +37,10 @@ function AllProducts() {
                 <img
                   src={item.avatar}
                   alt={item.title}
-                  className="w-full  transition-transform hover:scale-110 object-center ease-in-out duration-500 h-full cursor-pointer rounded-2xl"
+                  loading={index < 4 ? "eager" : "lazy"}
+                  width="320"
+                  height="320"
+                  className="w-80 transition-transform hover:scale-110 object-center ease-in-out duration-500 h-80 cursor-pointer rounded-2xl"
                 />
               </div>
             </Link>

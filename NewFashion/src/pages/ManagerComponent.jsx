@@ -1,6 +1,34 @@
-import React from 'react'
+import React, {  useEffect, useState } from 'react'
+import publicApi from "../pages/api/publicApi.js"
 
 function ManagerComponent() {
+    const [user, setUser] = useState([])
+   
+    
+
+   const getUser = async() => {
+    try {
+        const token = localStorage.getItem("token")
+        console.log("token", token);
+        const res = await publicApi.get("/manager/users",{
+            headers : {
+                Authorization : `Bearer ${token}`,
+                "Content-Type" : "application/json"
+            }
+        })
+        console.log("res",res.data.data);
+        setUser(res.data.data)
+         console.log("managerUser",user);
+        
+    } catch (error) {
+        console.log("error fetching data", error)
+    }
+   }
+
+   useEffect(()=>{
+    getUser()
+   },[])
+
   return (
     <div className='mt-20 px-20'>
     <section>

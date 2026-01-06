@@ -24,7 +24,7 @@ function Profile() {
       });
       console.log("Profile Response:", response.data);
       setUser(response.data.data);
-      setName(response.data.data)
+      // setName(response.data.data)
       setMobile(response.data.data.mobile);
       
       setAddress(response.data.data.address);
@@ -97,15 +97,11 @@ useEffect(()=>{
 
           <div className="flex gap-5 h-18 items-center shadow-lg">
             <div className="flex pl-5 gap-5">
-              <Link to="/orderdetails"><h1 className="pb-1 text-xl">My Orders</h1></Link>
+              <Link to="/orderdetails"><h1 className="pb-1 text-xl font-semibold shadow">My Orders</h1></Link>
             </div>
           </div>
 
-          <div className="flex gap-5 h-18 items-center shadow-lg">
-            <div className="flex pl-5 gap-5">
-              <h1 className="pb-1 text-xl">Account Settings</h1>
-            </div>
-          </div>
+          
 
           <div className="flex gap-5 h-18 items-center">
             <div className="flex pl-5 gap-5">
@@ -119,7 +115,7 @@ useEffect(()=>{
             <p>Saved Cards</p>
           </div>
           <div className="flex  pl-5 pb-10 gap-1 text-xl">
-            <button onClick={handleUpdate} className="shadow-2xl w-25 rounded-xl font-bold text-white text-center bg-amber-300 cursor-pointer">UPDATE</button>
+            <button onClick={handleUpdate} className="shadow-2xl w-25 rounded-xl font-bold text-white text-center bg-green-300 cursor-pointer">UPDATE</button>
           </div>
         </div>
 
@@ -127,11 +123,9 @@ useEffect(()=>{
         <div className="w-full md:w-[70%] ">
           <div className="flex gap-10 h-18 items-center pl-5 shadow-lg">
             <h1 className="text-xl font-semibold">Personal Information</h1>
-            {/* <p className="text-blue-700 font-semibold cursor-pointer">Edit</p> */}
           </div>
 
           <div className="flex gap-7 h-18 items-center pl-5 shadow-lg">
-            {/* <input type="text" value={name} placeholder={user.name || "Name"} /> */}
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="outline-none"/>
             <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} className="outline-none"/>
           </div>
@@ -139,7 +133,6 @@ useEffect(()=>{
           <div className="flex flex-col gap-5 py-5 pl-5 shadow-lg ">
             <div className="flex gap-10">
               <h1 className="text-xl font-semibold">Email Address</h1>
-              {/* <p className="text-blue-700 font-semibold cursor-pointer">Edit</p> */}
             </div>
             <div className="pl-2 flex flex-wrap">
               <input type="text" value={user.email || ""} className="outline-none w-full bg-transparent" readOnly />
@@ -149,7 +142,6 @@ useEffect(()=>{
           <div className="flex flex-col gap-5 py-5 pl-5 shadow-lg">
             <div className="flex gap-10">
               <h1 className="text-xl font-semibold">Password</h1>
-              {/* <p className="text-blue-700 font-semibold cursor-pointer">Edit</p> */}
             </div>
             <div className="pl-2">
               <input type="password" placeholder="Enter New Password" value={user.password} className="outline-none" />
@@ -159,7 +151,6 @@ useEffect(()=>{
           <div className="flex flex-col gap-5 py-5 pl-5 shadow-lg">
             <div className="flex gap-10">
               <h1 className="text-xl font-semibold">Mobile Number</h1>
-              {/* <p className="text-blue-700 font-semibold cursor-pointer">Edit</p> */}
             </div>
             <div className="pl-2">
               <input type="text" placeholder="Mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} className="outline-none" />
@@ -169,7 +160,6 @@ useEffect(()=>{
           <div className="flex flex-col gap-5 py-5 pl-5 shadow-lg">
             <div className="flex  gap-10">
               <h1 className="text-xl font-semibold">Address</h1>
-              {/* <p className="text-blue-700 font-semibold cursor-pointer">Edit</p>   */}
             </div>
             <div className="pl-2 flex flex-wrap ">
               <input type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full outline-none bg-transparent"/>
