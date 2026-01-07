@@ -73,14 +73,14 @@ function SignIn() {
   return (
     <>
     <div className="w-full min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center md:gap-15 ">
-      <div className="h-52 sm:h-64 md:h-90 pt-7 md:pt-11 md:max-w-7xl ">
+      <div className="h-52 sm:h-64 md:h-90  md:pt-11 md:max-w-7xl ">
         <img
           src="https://im.uniqlo.com/global-cms/spa/res417390df1624974374e1a543fc9a7e32fr.jpg"
           alt="Sign In Banner"
           className="w-full h-[30vh]  md:h-[46vh] object-center md:rounded-2xl"
         />
       </div>
-      <form onSubmit={handleSubmit} className=" flex  max-sm:w-full justify-center px-4 mt-38 md:mt-15 md:max-w-7xl">
+      <form onSubmit={handleSubmit} className=" flex  max-sm:w-full justify-center px-4 mt-23 md:mt-15 md:max-w-7xl">
         <div className="max-sm:w-full max-w-7xl bg-white rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col gap-2">
           <h1 className="text-2xl">Sign In</h1>
           <div className="flex flex-col gap-7 ">
