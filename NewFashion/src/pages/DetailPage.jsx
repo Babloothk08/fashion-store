@@ -103,7 +103,7 @@ function DetailPage() {
   return (
     <>
 
-      <div className="max-w-7xl mx-auto px-4 mt-20">
+      <div className="max-w-7xl mx-auto px-4 md:mt-20 mt-28">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           
           <div className="flex flex-col items-center gap-6">
@@ -114,7 +114,8 @@ function DetailPage() {
             />
 
             <div className="flex gap-4">
-              {[data.avatar, data.coverImage].map((img, i) => (
+              {/* {[data.avatar, data.coverImage].map((img, i) => ( */}
+              {[data.avatar].map((img, i) => (
                 <img
                   key={i}
                   src={img}
@@ -125,7 +126,8 @@ function DetailPage() {
                       singlePage === img
                         ? "border-amber-500"
                         : "border-gray-300"
-                    }`}
+                    }
+                    `}
                 />
               ))}
             </div>

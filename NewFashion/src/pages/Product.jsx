@@ -80,9 +80,19 @@ console.log(change)
   return (
     <>
     {/* <AdminNavbar/> */}
-     <div className="w-full min-h-screen px-4 pt-20   p-25   flex flex-col justify-center  items-center shadow-md bg-[url('https://im.uniqlo.com/global-cms/spa/res24ab4b5656b77c964dadd271276af132fr.jpg')] bg-cover ">
-      <form onSubmit={handleSubmit}>
-        <div className="w-full rounded-4xl shadow-lg bg-amber-100  p-4 flex flex-col justify-start ">
+    <div className="mt-45">
+       {/* <div className="w-full h-52 sm:h-64 md:h-80">
+        <img
+          src="https://im.uniqlo.com/global-cms/spa/res24ab4b5656b77c964dadd271276af132fr.jpg"
+          alt="Add Product Banner"
+          className="w-full h-full object-cover"
+        />
+      </div> */}
+      <form
+        onSubmit={handleSubmit}
+        className="w-full flex justify-center px-4 -mt-20 sm:-mt-24"
+      >
+        <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col gap-5 ">
           <h1 className="text-4xl pb-4 font-semibold text-center ">
             Add Products{" "}
           </h1>
@@ -166,7 +176,7 @@ console.log(change)
               </div> */}
             </div>
           </div>
-          {/* {msg && <p className='text-red-600 text-lg'>{msg}</p>} */}
+         
           <div className="text-white text-center pt-1  text-3xl  h-16 rounded-xl cursor-pointer">
             <button
               type="submit"

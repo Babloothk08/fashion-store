@@ -13,7 +13,7 @@ function Hero() {
     fade: true
   };
   return (
-    <div className="slider-container pt-12 w-full overflow-hidden">
+    <div className="slider-container pt-25 md:pt-12 w-full overflow-hidden">
       <Slider {...settings} >
         <div className=' '>
           <img src="https://www.jockey.in/cdn/shop/files/3-MIW-Desktop.webp?v=1750847852&width=1600" alt=""className='w-full object-cover h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]' />

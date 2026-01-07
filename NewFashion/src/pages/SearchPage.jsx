@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function SearchPage({ searchProduct }) {
   if (!searchProduct || searchProduct.length === 0) {
     return <p className="mt-24 text-center text-lg">No Product Found</p>;
@@ -8,7 +10,7 @@ function SearchPage({ searchProduct }) {
       <div
         className="
         grid 
-        grid-cols-1 
+        grid-cols-2
         sm:grid-cols-2 
         md:grid-cols-3 
         lg:grid-cols-4 
@@ -16,10 +18,10 @@ function SearchPage({ searchProduct }) {
       "
       >
         {searchProduct.map((item) => (
+          <Link to={`/detailPage/${item._id}`}>
           <div
             key={item._id}
             className="
-              border 
               p-4 
               rounded-lg 
               shadow-sm 
@@ -40,8 +42,10 @@ function SearchPage({ searchProduct }) {
             <p className="text-sm text-gray-600 mb-1">{item.heading}</p>
             <h3 className="font-semibold text-base">Price : ₹{item.price}</h3>
           </div>
+          </Link>
         ))}
       </div>
+      
     </div>
   );
 }

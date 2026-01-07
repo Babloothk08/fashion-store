@@ -18,6 +18,8 @@ function AllProducts() {
 
   return (
     <div className="
+    flex-grow
+    min-h-screen
   grid
   grid-cols-2     
   sm:grid-cols-2
@@ -26,6 +28,7 @@ function AllProducts() {
   gap-6
   px-4 sm:px-6 lg:px-10
   pt-22
+  pb-10
 ">
   {data.map((item, index) => (
     <motion.div
@@ -55,7 +58,7 @@ function AllProducts() {
               loading={index < 4 ? "eager" : "lazy"}
               className="
                 w-full h-full
-                object-cover
+                object-center
                 transition-transform duration-500
                 hover:scale-110
               "
