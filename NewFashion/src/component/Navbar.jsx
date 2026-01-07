@@ -50,7 +50,17 @@ function Navbar({ search, setSearch, handleSearch }) {
           </span>
         </Link>
 
-        <nav className="hidden md:flex gap-10 text-sm font-semibold text-gray-300">
+        <Link
+          to="/home"
+          className=" text-xl font-semibold  md:hidden"
+        >
+          
+          <span className="text-white bg-clip-text">
+            Home
+          </span>
+        </Link>
+
+        <nav className="hidden md:flex gap-10 text-sm font-semibold text-gray-300 ">
           {[
             { name: "Home", path: "/home" },
             { name: "Shop", path: "/data" },
@@ -72,7 +82,7 @@ function Navbar({ search, setSearch, handleSearch }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-4 sm:gap-6 pr-2">
           <div className="hidden lg:flex items-center gap-2 bg-slate-700 px-3 py-1.5 rounded-full">
             <IoSearch
               className="text-gray-300 cursor-pointer"
