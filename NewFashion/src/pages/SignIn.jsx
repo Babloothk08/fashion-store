@@ -72,7 +72,7 @@ function SignIn() {
 
   return (
     <>
-    <div className="w-full min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center md:gap-15 ">
+    <div className=" w-full min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center md:gap-15 ">
       <div className="h-52 sm:h-64 md:h-90  md:pt-11 md:max-w-7xl ">
         <img
           src="https://im.uniqlo.com/global-cms/spa/res417390df1624974374e1a543fc9a7e32fr.jpg"
