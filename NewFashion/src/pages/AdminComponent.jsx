@@ -6,7 +6,7 @@ function AdminComponent() {
   const [managers, setManagers] = useState([]);
   const [newManager, setNewManager] = useState({ name: "", lastName: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem("token"); // JWT token
+  const token = localStorage.getItem("token"); 
 
   const config = {
     headers: {

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import publicApi from "../pages/api/publicApi.js"
 import Footer from "../component/Footer.jsx";
+import bg from "../assets/backgroundWallpaper.jpeg"
 
 function SignUp() {
   const [change, setChange] = useState({
@@ -70,18 +71,7 @@ function SignUp() {
 
  return (
   <div>
-    <div className="w-full min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center md:gap-15">
-
-   
-    <div className=" h-52 sm:h-64 md:h-90 pt-24 md:pt-11   md:max-w-7xl ">
-      <img
-        src="https://im.uniqlo.com/global-cms/spa/res24ab4b5656b77c964dadd271276af132fr.jpg"
-        alt="Signup Banner"
-        className="w-full h-[30vh]  md:h-[46vh] object-center md:rounded-2xl"
-      />
-    </div>
-
-   
+    <div style={{backgroundImage: `url(${bg})`}} className="w-full min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center md:gap-15 object-cover">   
     <form
       onSubmit={handleSubmit}
       className="flex  max-sm:w-full justify-center px-4 mt-38 md:mt-15 md:max-w-7xl "

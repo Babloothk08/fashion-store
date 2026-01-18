@@ -1,42 +1,39 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Hero() {
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    fade: true
-  };
+function VideoComponent() {
   return (
-    <div className="slider-container pt-25 md:pt-12 w-full overflow-hidden">
-      <Slider {...settings} >
-        <div className=' '>
-          <img src="https://www.jockey.in/cdn/shop/files/3-MIW-Desktop.webp?v=1750847852&width=1600" alt=""className='w-full object-cover h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]' />
+    <section className="relative w-full h-screen overflow-hidden">
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="https://media.istockphoto.com/id/2169599156/video/close-up-little-hand-of-child-baby-holding-hand-of-mother-a-newborn-holds-on-to-moms-dads.mp4?s=mp4-640x640-is&k=20&c=D4NEDTjzqK0W83Nv9tDhO8MT6hdkLyrYzZY_cOCeWQo="
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
+        <div className="max-w-4xl text-white">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="text-blue-400">Professional </span> Fashion{" "}
+            <span className="text-blue-400">Clothes </span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-gray-200 mb-8">
+            Build a strong foundation in Fashion with FashionClothes designed for aspiring Everyone.
+          </p>
+
+          <button className="px-8 py-3 bg-blue-700 hover:bg-blue-800 rounded-xl text-lg font-semibold transition cursor-pointer">
+            <Link to="/contact">Enquiry Today</Link>
+          </button>
         </div>
-        <div>
-          <img src="https://www.jockey.in/cdn/shop/files/4-WOW-Desktop.webp?v=1750847944&width=1600" alt=""className='w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover'  />
-        </div>
-        <div>
-          <img src="https://www.jockey.in/cdn/shop/files/2-Groove-Desktop.webp?v=1750943150&width=1600" alt="" className='w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover' />
-        </div>
-        <div>
-          <img src="https://www.jockey.in/cdn/shop/files/1-WIW-Desktop.webp?v=1750847756&width=1600" alt=""className='w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover'  />
-        </div>
-        <div>
-          <img src="https://images.bewakoof.com/uploads/grid/app/1x1-earlywinter-rm-2-1756993733.jpg" alt=""className='w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover'  />
-        </div>
-        <div>
-          <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/Baki_Hanma_-_Son_of_ogre_-Homepage_Banner.jpg?w=1500&dpr=1.3" alt=""className='w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover'  />
-        </div>
-      </Slider>
-      
-    </div>
+      </div>
+
+    </section>
   );
 }
 
-export default Hero
+export default VideoComponent;
