@@ -62,7 +62,7 @@ function Data() {
 
   return (
     <>
-     <div>
+     <div className="md:mt-2 mt-25 ">
       <div className="mt-13">
       <img src="https://media.istockphoto.com/id/509486410/photo/sunglasses-girl.jpg?s=612x612&w=0&k=20&c=h52lOSHk3X-ZAl6rK66rBdxVeLWuwI0ZhJ7PiNZfYaY=" alt="Error" loading="eager" fetchpriority="high"className="w-full object-cover obejct-center max-sm:object-center h-90 max-sm:h-50" />
      </div>

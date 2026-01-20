@@ -77,56 +77,65 @@ function AdminComponent() {
     }
   };
 
-  return (
-    <div className="p-6 mt-15 ">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+ return (
+  <div className="p-4 sm:p-6 md:mt-16 mt-20 max-w-7xl mx-auto">
+    <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">
+      Admin Dashboard
+    </h1>
 
-      {loading && <p>Loading...</p>}
+    {loading && <p className="text-center text-gray-500">Loading...</p>}
 
-      {/* Users Table */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2">Users</h2>
-        <table className="w-full border border-gray-300">
+    {/* USERS */}
+    <section className="mb-10 bg-white shadow rounded-xl p-4 sm:p-6">
+      <h2 className="text-xl font-semibold mb-4 text-gray-700">Users</h2>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-200 text-sm">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="border px-2 py-1">Name</th>
-              <th className="border px-2 py-1">Email</th>
-              <th className="border px-2 py-1">Orders</th>
-              <th className="border px-2 py-1">Total Amount</th>
+            <tr className="bg-gray-100 text-left">
+              <th className="border px-3 py-2">Name</th>
+              <th className="border px-3 py-2">Email</th>
+              <th className="border px-3 py-2 text-center">Orders</th>
+              <th className="border px-3 py-2 text-right">Total</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id}>
-                <td className="border px-2 py-1">{user.name}</td>
-                <td className="border px-2 py-1">{user.email}</td>
-                <td className="border px-2 py-1">{user.totalOrders}</td>
-                <td className="border px-2 py-1">₹ {user.totalAmount?.toFixed(2)}</td>
+              <tr key={user._id} className="hover:bg-gray-50">
+                <td className="border px-3 py-2">{user.name}</td>
+                <td className="border px-3 py-2 break-all">{user.email}</td>
+                <td className="border px-3 py-2 text-center">{user.totalOrders}</td>
+                <td className="border px-3 py-2 text-right">
+                  ₹ {user.totalAmount?.toFixed(2)}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </section>
+      </div>
+    </section>
 
-      {/* Managers Table */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2">Managers</h2>
-        <table className="w-full border border-gray-300 mb-4">
+    {/* MANAGERS */}
+    <section className="bg-white shadow rounded-xl p-4 sm:p-6">
+      <h2 className="text-xl font-semibold mb-4 text-gray-700">Managers</h2>
+
+      <div className="overflow-x-auto mb-6">
+        <table className="min-w-full border border-gray-200 text-sm">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border px-2 py-1">Name</th>
-              <th className="border px-2 py-1">Email</th>
-              <th className="border px-2 py-1">Actions</th>
+              <th className="border px-3 py-2">Name</th>
+              <th className="border px-3 py-2">Email</th>
+              <th className="border px-3 py-2 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {managers.map((manager) => (
-              <tr key={manager._id}>
-                <td className="border px-2 py-1">{manager.name}</td>
-                <td className="border px-2 py-1">{manager.email}</td>
-                <td className="border px-2 py-1">
+              <tr key={manager._id} className="hover:bg-gray-50">
+                <td className="border px-3 py-2">{manager.name}</td>
+                <td className="border px-3 py-2 break-all">{manager.email}</td>
+                <td className="border px-3 py-2 text-center">
                   <button
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition"
                     onClick={() => handleDeleteManager(manager._id)}
                   >
                     Delete
@@ -136,45 +145,64 @@ function AdminComponent() {
             ))}
           </tbody>
         </table>
+      </div>
 
-        {/* Add Manager Form */}
-        <div className="border p-4 rounded">
-          <h3 className="font-semibold mb-2">Add New Manager</h3>
+      {/* ADD MANAGER */}
+      <div className="border rounded-xl p-4 bg-gray-50">
+        <h3 className="font-semibold mb-4 text-gray-700">
+          Add New Manager
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
           <input
-            className="border p-1 mr-2"
+            className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="First Name"
             value={newManager.name}
-            onChange={(e) => setNewManager({ ...newManager, name: e.target.value })}
+            onChange={(e) =>
+              setNewManager({ ...newManager, name: e.target.value })
+            }
           />
+
           <input
-            className="border p-1 mr-2"
+            className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Last Name"
             value={newManager.lastName}
-            onChange={(e) => setNewManager({ ...newManager, lastName: e.target.value })}
+            onChange={(e) =>
+              setNewManager({ ...newManager, lastName: e.target.value })
+            }
           />
+
           <input
-            className="border p-1 mr-2"
+            className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Email"
             value={newManager.email}
-            onChange={(e) => setNewManager({ ...newManager, email: e.target.value })}
+            onChange={(e) =>
+              setNewManager({ ...newManager, email: e.target.value })
+            }
           />
+
           <input
             type="password"
-            className="border p-1 mr-2"
+            className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Password"
             value={newManager.password}
-            onChange={(e) => setNewManager({ ...newManager, password: e.target.value })}
+            onChange={(e) =>
+              setNewManager({ ...newManager, password: e.target.value })
+            }
           />
-          <button
-            className="bg-blue-500 text-white px-3 py-1 rounded"
-            onClick={handleAddManager}
-          >
-            Add Manager
-          </button>
         </div>
-      </section>
-    </div>
-  );
+
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition"
+          onClick={handleAddManager}
+        >
+          Add Manager
+        </button>
+      </div>
+    </section>
+  </div>
+);
+
 }
 
 export default AdminComponent;
